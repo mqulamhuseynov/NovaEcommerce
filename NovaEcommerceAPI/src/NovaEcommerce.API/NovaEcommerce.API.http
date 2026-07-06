@@ -1,0 +1,6 @@
+@NovaEcommerce.API_HostAddress = http://localhost:5166
+
+GET {{NovaEcommerce.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
