@@ -1,12 +1,54 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E22EDA-DDB8-4EAF-B4A7-B808FF783178}|src\\NovaEcommerce.API\\NovaEcommerce.API.csproj|c:\\users\\baloglan\\documents\\projects\\novaecommerceapi\\src\\novaecommerce.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6E22EDA-DDB8-4EAF-B4A7-B808FF783178}|src\\NovaEcommerce.API\\NovaEcommerce.API.csproj|solutionrelative:src\\novaecommerce.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260706085035__initial.cs",
+              "DocumentMoniker": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
+              "RelativeDocumentMoniker": "src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
+              "ToolTip": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
+              "RelativeToolTip": "src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-06T08:50:35.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\NovaEcommerce.API\\Program.cs",
+              "ToolTip": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.API\\Program.cs",
+              "RelativeToolTip": "src\\NovaEcommerce.API\\Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-06T08:41:23.289Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
