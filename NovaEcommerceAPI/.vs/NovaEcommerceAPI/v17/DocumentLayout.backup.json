@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E019737-43B5-43ED-AC29-CC38AB012329}|src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj|c:\\users\\administrator\\onedrive\\desktop\\novaecommerce\\novaecommerceapi\\src\\novaecommerce.servicesapp\\services\\implementations\\homeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E019737-43B5-43ED-AC29-CC38AB012329}|src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj|solutionrelative:src\\novaecommerce.servicesapp\\services\\implementations\\homeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6E22EDA-DDB8-4EAF-B4A7-B808FF783178}|src\\NovaEcommerce.API\\NovaEcommerce.API.csproj|c:\\users\\baloglan\\documents\\projects\\novaecommerceapi\\src\\novaecommerce.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6E22EDA-DDB8-4EAF-B4A7-B808FF783178}|src\\NovaEcommerce.API\\NovaEcommerce.API.csproj|solutionrelative:src\\novaecommerce.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E019737-43B5-43ED-AC29-CC38AB012329}|src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj|c:\\users\\administrator\\onedrive\\desktop\\novaecommerce\\novaecommerceapi\\src\\novaecommerce.servicesapp\\dtos\\curatedpickdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E019737-43B5-43ED-AC29-CC38AB012329}|src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj|solutionrelative:src\\novaecommerce.servicesapp\\dtos\\curatedpickdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74996D51-65EE-4B81-B009-2A7E63E375CA}|src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj|c:\\users\\administrator\\onedrive\\desktop\\novaecommerce\\novaecommerceapi\\src\\novaecommerce.dataaccess\\repositories\\implementations\\homerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74996D51-65EE-4B81-B009-2A7E63E375CA}|src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj|solutionrelative:src\\novaecommerce.dataaccess\\repositories\\implementations\\homerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20260706085035__initial.cs",
-              "DocumentMoniker": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
-              "RelativeDocumentMoniker": "src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
-              "ToolTip": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
-              "RelativeToolTip": "src\\NovaEcommerce.DataAccess\\Migrations\\20260706085035__initial.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "CuratedPickDto.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\DTOs\\CuratedPickDto.cs",
+              "RelativeDocumentMoniker": "src\\NovaEcommerce.ServicesApp\\DTOs\\CuratedPickDto.cs",
+              "ToolTip": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\DTOs\\CuratedPickDto.cs*",
+              "RelativeToolTip": "src\\NovaEcommerce.ServicesApp\\DTOs\\CuratedPickDto.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T08:50:35.688Z",
+              "WhenOpened": "2026-07-07T15:53:38.317Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.API\\Program.cs",
-              "RelativeDocumentMoniker": "src\\NovaEcommerce.API\\Program.cs",
-              "ToolTip": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.API\\Program.cs",
-              "RelativeToolTip": "src\\NovaEcommerce.API\\Program.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwAwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "HomeService.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\Services\\Implementations\\HomeService.cs",
+              "RelativeDocumentMoniker": "src\\NovaEcommerce.ServicesApp\\Services\\Implementations\\HomeService.cs",
+              "ToolTip": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\Services\\Implementations\\HomeService.cs",
+              "RelativeToolTip": "src\\NovaEcommerce.ServicesApp\\Services\\Implementations\\HomeService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwDYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T08:41:23.289Z",
+              "WhenOpened": "2026-07-07T14:51:55.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Repositories\\Implementations\\HomeRepository.cs",
+              "RelativeDocumentMoniker": "src\\NovaEcommerce.DataAccess\\Repositories\\Implementations\\HomeRepository.cs",
+              "ToolTip": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\Repositories\\Implementations\\HomeRepository.cs",
+              "RelativeToolTip": "src\\NovaEcommerce.DataAccess\\Repositories\\Implementations\\HomeRepository.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-07T14:37:28.545Z",
               "EditorCaption": ""
             }
           ]

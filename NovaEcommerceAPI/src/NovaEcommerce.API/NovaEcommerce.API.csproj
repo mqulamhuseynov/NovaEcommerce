@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NovaEcommerce.DataAccess\NovaEcommerce.DataAccess.csproj" />
     <ProjectReference Include="..\NovaEcommerce.ServicesApp\NovaEcommerce.ServicesApp.csproj" />
   </ItemGroup>
