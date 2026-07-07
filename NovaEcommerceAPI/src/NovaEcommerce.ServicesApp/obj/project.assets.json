@@ -909,23 +909,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\baloglan\\.nuget\\packages\\": {},
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
       "projectName": "NovaEcommerce.ServicesApp",
-      "projectPath": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
-      "packagesPath": "C:\\Users\\baloglan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\obj\\",
+      "projectPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\baloglan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -934,14 +934,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
-              "projectPath": "C:\\Users\\baloglan\\Documents\\Projects\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj"
+            "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj"
             }
           }
         }
@@ -956,7 +957,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -995,7 +996,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.315/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

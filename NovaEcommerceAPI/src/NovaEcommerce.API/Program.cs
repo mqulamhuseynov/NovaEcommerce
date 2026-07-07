@@ -1,7 +1,11 @@
-
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using NovaEcommerce.DataAccess.DbContext;
+using NovaEcommerce.DataAccess.Repositories.Implementations;
+using NovaEcommerce.ServicesApp.Interfaces;
+using NovaEcommerce.ServicesApp.Services;
+using NovaEcommerce.ServicesApp.Services.Implementations;
+using NovaEcommerce.ServicesApp.Services.Interfaces;
 
 namespace NovaEcommerce.API
 {
@@ -11,12 +15,12 @@ namespace NovaEcommerce.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+            builder.Services.AddScoped<IHomeService, HomeService>();
 
             //db
             Env.Load();
-            var dbConnectionString = Environment.GetEnvironmentVariable("DATABASE");
+            var dbConnectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(dbConnectionString));
 
             builder.Services.AddControllers();
