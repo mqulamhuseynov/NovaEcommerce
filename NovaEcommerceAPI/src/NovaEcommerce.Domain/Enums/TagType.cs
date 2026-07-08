@@ -5,5 +5,6 @@ public enum TagType
     New,
     Sale,
     BestSeller,
-    FlashSale
+    FlashSale,
+    Featured
 }
