@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Generic\" />
-    <Folder Include="Repositories\Interfaces\" />
+    <Compile Remove="Repositories\Generic\**" />
+    <Compile Remove="Repositories\Interfaces\**" />
+    <EmbeddedResource Remove="Repositories\Generic\**" />
+    <EmbeddedResource Remove="Repositories\Interfaces\**" />
+    <None Remove="Repositories\Generic\**" />
+    <None Remove="Repositories\Interfaces\**" />
   </ItemGroup>
 
   <ItemGroup>
