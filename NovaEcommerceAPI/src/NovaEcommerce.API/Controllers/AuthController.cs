@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NovaEcommerce.ServicesApp.DTOs;
 using NovaEcommerce.ServicesApp.DTOs.AuthDtos;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 using System.Security.Claims;
 
 namespace NovaEcommerce.API.Controllers;

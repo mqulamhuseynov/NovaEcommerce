@@ -2,7 +2,7 @@
 using NovaEcommerce.DataAccess.DbContext;
 using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.Domain.Enums;
-using NovaEcommerce.ServicesApp.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
