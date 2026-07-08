@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using NovaEcommerce.Domain.Entities;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
