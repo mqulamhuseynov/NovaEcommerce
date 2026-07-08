@@ -8,6 +8,7 @@ public class ProductTagConfiguration : IEntityTypeConfiguration<ProductTag>
 {
     public void Configure(EntityTypeBuilder<ProductTag> builder)
     {
+
         builder.Property(t => t.TagType).HasConversion<string>().HasMaxLength(20);
         builder.Property(t => t.Value).HasMaxLength(100);
     }

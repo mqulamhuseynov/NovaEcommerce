@@ -1,128 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj": {}
+    "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj": {}
   },
   "projects": {
-    "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj": {
+    "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj",
-        "projectName": "NovaEcommerce.DataAccess",
-        "projectPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "framework": "net8.0",
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
-                "projectPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.300"
-      },
-      "frameworks": {
-        "net8.0": {
-          "framework": "net8.0",
-          "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.28, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.28, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[8.0.28, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.28, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            }
-          ],
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj",
         "projectName": "NovaEcommerce.Domain",
-        "projectPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -131,11 +26,11 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
-            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -150,11 +45,10 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
-          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.Extensions.Identity.Stores": {
@@ -173,43 +67,29 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj": {
+    "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
         "projectName": "NovaEcommerce.ServicesApp",
-        "projectPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
-        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\NovaEcommerce.ServicesApp.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.ServicesApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -218,18 +98,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
-            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj": {
-                "projectPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.DataAccess\\NovaEcommerce.DataAccess.csproj"
-              },
-              "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
-                "projectPath": "D:\\NovaEcommerce-main\\NovaEcommerce-main\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj"
+              "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj": {
+                "projectPath": "C:\\Users\\Administrator\\OneDrive\\Desktop\\NovaEcommerce\\NovaEcommerceAPI\\src\\NovaEcommerce.Domain\\NovaEcommerce.Domain.csproj"
               }
             }
           }
@@ -244,11 +121,10 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
-          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "AutoMapper": {
@@ -266,18 +142,6 @@
             "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[12.1.1, )"
-            },
-            "Microsoft.Extensions.Configuration.Abstractions": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.IdentityModel.Tokens": {
-              "target": "Package",
-              "version": "[8.19.1, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[8.19.1, )"
             }
           },
           "imports": [
@@ -291,26 +155,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
