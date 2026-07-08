@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Generic\" />
     <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Repositories\Implementations\" />
+    <Folder Include="Repositories\Generic\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NovaEcommerce.Domain\NovaEcommerce.Domain.csproj" />
-    <ProjectReference Include="..\NovaEcommerce.ServicesApp\NovaEcommerce.ServicesApp.csproj" />
   </ItemGroup>
 
 </Project>
