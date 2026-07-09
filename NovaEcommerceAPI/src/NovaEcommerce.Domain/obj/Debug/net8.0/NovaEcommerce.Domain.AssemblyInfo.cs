@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NovaEcommerce.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43b3e4865ea36167b552c4036e535376b062432b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20847f46af6ca79ac4c6eb11047bef1130e27cb3")]
 [assembly: System.Reflection.AssemblyProductAttribute("NovaEcommerce.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NovaEcommerce.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
