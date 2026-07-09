@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NovaEcommerce.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43b3e4865ea36167b552c4036e535376b062432b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88e882b9d93801772062d6e7933d062d80160087")]
 [assembly: System.Reflection.AssemblyProductAttribute("NovaEcommerce.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NovaEcommerce.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

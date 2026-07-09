@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.Json;
@@ -23,15 +24,30 @@ namespace NovaEcommerce.API.Controllers
         [HttpGet("active")]
         public async Task<IActionResult> Active()
         {
-            var result = await _service.TGetActiveAsync();  
-            return Ok(result);
+            var result = await _service.TGetActiveAsync();
+
+            return result.StatusCode switch
+            {
+                200 => Ok(result),
+                400 => BadRequest(result),
+                404 => NotFound(result),
+                _ => StatusCode(result.StatusCode, result)
+            };
+
         }
 
         [HttpGet("upcoming")]
         public async Task<IActionResult> Upcoming()
         {
             var result = await _service.TGetUpcomingAsync();
-            return Ok(result);
+
+            return result.StatusCode switch
+            {
+                200 => Ok(result),
+                400 => BadRequest(result),
+                404 => NotFound(result),
+                _ => StatusCode(result.StatusCode, result)
+            };
         }
 
         [Authorize]
@@ -47,12 +63,14 @@ namespace NovaEcommerce.API.Controllers
 
             var result = await _service.TNotifyAsync(id, email);
 
-            if (!result.Success)
+            return result.StatusCode switch
             {
-                return BadRequest(result);
-            }
+                200 => Ok(result),
+                400 => BadRequest(result),
+                404 => NotFound(result),
+                _ => StatusCode(result.StatusCode, result)
+            };
 
-            return Ok(result);
         }
     }
 }

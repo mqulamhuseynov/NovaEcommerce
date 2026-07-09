@@ -28,13 +28,11 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         {
             var sale = await _flashSaleRepo.GetActiveAsync();
 
-            if(sale == null)
+            if (sale == null)
             {
-                return new ApiResponse<ActiveFlashSaleDto>
-                (
-                    false,
-                    "No active flash sale found.",
-                    null!
+                return ApiResponse<ActiveFlashSaleDto>.FailResponse(
+                     "No active flash sale found.",
+                     404
                 );
             }
 
@@ -60,13 +58,10 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
             };
 
-            var response = new ApiResponse<ActiveFlashSaleDto>
-                (
-                    true,
-                    "Active flash sale retrieved successfully.",
-                    result
-                );
-
+            var response = ApiResponse<ActiveFlashSaleDto>.SuccessResponse(
+                                  result,
+                                  "Active flash sale retrieved successfully."
+                          );
             return response;
 
         }
@@ -75,13 +70,12 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         {
             var sale = await _flashSaleRepo.GetUpComingAsync();
 
-            if(sale == null)
+            if (sale == null)
             {
-                return new ApiResponse<List<UpcomingFlashSaleDto>>
-                    (
-                        false,
+                return ApiResponse<List<UpcomingFlashSaleDto>>.FailResponse
+                    (              
                         "No upcoming flash sales found.",
-                        null!
+                        404
                     );
             }
 
@@ -95,7 +89,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
                 EndsAt = s.EndsAt,
 
-                Items = s.Items.Select (x=> new FlashSaleItemDto
+                Items = s.Items.Select(x => new FlashSaleItemDto
                 {
 
                     Id = x.Id,
@@ -112,14 +106,13 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
             }).ToList();
 
-            var response = new ApiResponse<List<UpcomingFlashSaleDto>>
+            var response = ApiResponse<List<UpcomingFlashSaleDto>>.SuccessResponse
                 (
-                    true,
-                    "Upcoming flash sales retrieved successfully.",
-                    result
+                    result,
+                    "Upcoming flash sales retrieved successfully."          
                 );
 
-            return response;    
+            return response;
 
         }
 
@@ -127,14 +120,14 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         {
             var flashSale = await _flashSaleRepo.GetByIdAsync(flashSaleId);
 
-            if(flashSale == null)
+            if (flashSale == null)
             {
                 throw new KeyNotFoundException("Flash sale not found.");
             }
 
             var exist = await _flashSaleNotifyRepo.ExistsAsync(flashSaleId, email);
 
-            if(exist)
+            if (exist)
             {
                 throw new InvalidOperationException("You have already requested notification.");
             }
@@ -148,11 +141,9 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             await _flashSaleNotifyRepo.AddAsync(notify);
             await _flashSaleNotifyRepo.SaveChangesAsync();
 
-            var response = new ApiResponse<string>
+            var response = ApiResponse<string>.SuccessResponse
                 (
-                    true,
-                    "Notification request created successfully.",
-                    null!
+                    "Notification request created successfully."
                 );
 
             return response;
