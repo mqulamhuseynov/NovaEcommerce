@@ -66,8 +66,10 @@ public class Program
 
         builder.Services.AddAuthorization();
 
+        // Services
         builder.Services.AddScoped<IJwtService, JwtService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
+        builder.Services.AddScoped<IBrandService, BrandService>();
 
         builder.Services.AddControllers();
 
@@ -88,7 +90,7 @@ public class Program
                 Scheme = "bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Bearer {token}"
+                Description = "Enter: Bearer {your JWT token}"
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement

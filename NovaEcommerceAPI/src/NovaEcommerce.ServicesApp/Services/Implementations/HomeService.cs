@@ -1,12 +1,12 @@
 ﻿using NovaEcommerce.ServicesApp.Services;
 using NovaEcommerce.ServicesApp.DTOs;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NovaEcommerce.ServicesApp.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 
 namespace NovaEcommerce.ServicesApp.Services.Implementations
 {
