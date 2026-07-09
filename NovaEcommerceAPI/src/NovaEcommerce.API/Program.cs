@@ -1,4 +1,4 @@
-﻿using DotNetEnv;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,13 +6,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NovaEcommerce.API.Middleware;
 using NovaEcommerce.DataAccess.DbContext;
-using NovaEcommerce.DataAccess.Repositories.Implementations;
 using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.ServicesApp.Services.Implementations;
-using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
-using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
+using NovaEcommerce.ServicesApp.Services.Interfaces;
 using System.Text;
-using System.Text.Json;
 
 namespace NovaEcommerce.API;
 
@@ -65,47 +62,14 @@ public class Program
                         IssuerSigningKey = new SymmetricSecurityKey(
                             Encoding.UTF8.GetBytes(jwtSecret!))
                     };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnChallenge = async context =>
-                    {
-                        context.HandleResponse();
-                        context.Response.ContentType = "application/json";
-                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-
-                        var result = JsonSerializer.Serialize(new
-                        {
-                            statusCode = StatusCodes.Status401Unauthorized,
-                            message = "unauthorized"
-                        });
-
-                        await context.Response.WriteAsync(result);
-                    },
-                    OnForbidden = async context =>
-                    {
-                        context.Response.ContentType = "application/json";
-                        context.Response.StatusCode = StatusCodes.Status403Forbidden;
-
-                        var result = JsonSerializer.Serialize(new
-                        {
-                            statusCode = StatusCodes.Status403Forbidden,
-                            message = "forbidden"
-                        });
-
-                        await context.Response.WriteAsync(result);
-                    }
-                };
             });
 
         builder.Services.AddAuthorization();
 
+        // Services
         builder.Services.AddScoped<IJwtService, JwtService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
-        builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-        builder.Services.AddScoped<IHomeRepository, HomeRepository>();
-        builder.Services.AddScoped<IProductRepository, ProductRepository>();
-        builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<IBrandService, BrandService>();
 
         builder.Services.AddControllers();
 
@@ -126,7 +90,7 @@ public class Program
                 Scheme = "bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Bearer {token}"
+                Description = "Enter: Bearer {your JWT token}"
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
