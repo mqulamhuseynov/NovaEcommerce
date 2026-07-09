@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.ServicesApp.DTOs.AuthDtos;
 using NovaEcommerce.ServicesApp.DTOs.Responses;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 
 namespace NovaEcommerce.ServicesApp.Services.Implementations;
 

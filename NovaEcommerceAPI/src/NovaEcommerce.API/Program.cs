@@ -8,9 +8,9 @@ using NovaEcommerce.API.Middleware;
 using NovaEcommerce.DataAccess.DbContext;
 using NovaEcommerce.DataAccess.Repositories.Implementations;
 using NovaEcommerce.Domain.Entities;
-using NovaEcommerce.ServicesApp.Interfaces;
 using NovaEcommerce.ServicesApp.Services.Implementations;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 using System.Text;
 using System.Text.Json;
 
@@ -104,6 +104,8 @@ public class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
+        builder.Services.AddScoped<IProductService, ProductService>();
 
         builder.Services.AddControllers();
 
