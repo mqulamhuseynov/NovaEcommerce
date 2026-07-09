@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NovaEcommerce.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43b3e4865ea36167b552c4036e535376b062432b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2abf25fd7b787b467c53282f4e14b9d81b431f06")]
 [assembly: System.Reflection.AssemblyProductAttribute("NovaEcommerce.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NovaEcommerce.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
