@@ -36,6 +36,8 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     public DbSet<SupportArticle> SupportArticles => Set<SupportArticle>();
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<HeroBanner> HeroBanners => Set<HeroBanner>();
+    public DbSet<NotifyRequest> NotifyRequests => Set<NotifyRequest>(); 
+    public DbSet<CheckoutSession> CheckoutSessions => Set<CheckoutSession>();   
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
