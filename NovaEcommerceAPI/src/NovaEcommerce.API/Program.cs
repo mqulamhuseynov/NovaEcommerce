@@ -107,6 +107,8 @@ public class Program
         builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();    
         builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
         builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();  
+        builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
+        builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
 
         builder.Services.AddControllers();
 

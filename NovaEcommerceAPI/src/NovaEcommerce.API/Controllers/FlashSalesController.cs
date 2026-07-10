@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace NovaEcommerce.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/flash-sales")]
     [ApiController]
     public class FlashSalesController : ControllerBase
     {
