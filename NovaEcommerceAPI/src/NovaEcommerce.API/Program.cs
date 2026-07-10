@@ -104,6 +104,11 @@ public class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+        builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();    
+        builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
+        builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();  
+        builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
+        builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductService, ProductService>();
 
