@@ -8,7 +8,7 @@ namespace NovaEcommerce.ServicesApp.DTOs.Responses
 {
     public class PaginationResponse<T>
     {
-        public IEnumerable<T> Items { get; set; }
+        public IEnumerable<T> Items { get; set; } 
         public int TotalCount { get; set; }
         public int TotalPages { get; set; }
         public int CurrentPage { get; set; }
