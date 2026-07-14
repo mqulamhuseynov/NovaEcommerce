@@ -121,10 +121,21 @@ public class Program
 
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<ICartRepository, CartRepository>();
+        builder.Services.AddScoped<ICartService, CartService>();
 
         builder.Services.AddControllers();
 
         builder.Services.AddEndpointsApiExplorer();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowTester", policy =>
+                policy.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .WithExposedHeaders("X-Session-Id"));
+        });
 
         builder.Services.AddSwaggerGen(options =>
         {
@@ -177,6 +188,8 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.UseCors("AllowTester");
 
         app.Run();
     }
