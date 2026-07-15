@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using NovaEcommerce.Domain.Entities;
-using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
+using NovaEcommerce.ServicesApp.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,11 +13,6 @@ public class JwtService : IJwtService
     {
         var jwtSecret =
             Environment.GetEnvironmentVariable("JWT_SECRET");
-
-        if (string.IsNullOrEmpty(jwtSecret))
-        {
-            throw new Exception("check .env");
-        }
 
         var expireText =
             Environment.GetEnvironmentVariable("JWT_ACCESS_EXPIRES") ?? "15m";

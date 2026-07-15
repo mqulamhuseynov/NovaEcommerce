@@ -7,12 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repositories\Generic\**" />
-    <Compile Remove="Repositories\Interfaces\**" />
-    <EmbeddedResource Remove="Repositories\Generic\**" />
-    <EmbeddedResource Remove="Repositories\Interfaces\**" />
-    <None Remove="Repositories\Generic\**" />
-    <None Remove="Repositories\Interfaces\**" />
+    <Folder Include="Repositories\Generic\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NovaEcommerce.Domain\NovaEcommerce.Domain.csproj" />
-    <ProjectReference Include="..\NovaEcommerce.ServicesApp\NovaEcommerce.ServicesApp.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using DotNetEnv;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,12 +7,11 @@ using Microsoft.OpenApi.Models;
 using NovaEcommerce.API.Middleware;
 using NovaEcommerce.DataAccess.DbContext;
 using NovaEcommerce.DataAccess.Repositories.Implementations;
+using NovaEcommerce.DataAccess.Repositories.Interfaces;
 using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.ServicesApp.Services.Implementations;
-using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
-using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
+using NovaEcommerce.ServicesApp.Services.Interfaces;
 using System.Text;
-using System.Text.Json;
 
 namespace NovaEcommerce.API;
 
@@ -24,11 +23,11 @@ public class Program
 
         Env.Load();
 
-        var connection =
+        var connectionString =
             Environment.GetEnvironmentVariable("DATABASE");
 
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(connection));
+            options.UseSqlServer(connectionString));
 
         builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
         {
@@ -62,80 +61,29 @@ public class Program
                         ValidateAudience = false,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(jwtSecret!))
+
+                        IssuerSigningKey =
+                            new SymmetricSecurityKey(
+                                Encoding.UTF8.GetBytes(jwtSecret!))
                     };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnChallenge = async context =>
-                    {
-                        context.HandleResponse();
-                        context.Response.ContentType = "application/json";
-                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-
-                        var result = JsonSerializer.Serialize(new
-                        {
-                            statusCode = StatusCodes.Status401Unauthorized,
-                            message = "unauthorized"
-                        });
-
-                        await context.Response.WriteAsync(result);
-                    },
-                    OnForbidden = async context =>
-                    {
-                        context.Response.ContentType = "application/json";
-                        context.Response.StatusCode = StatusCodes.Status403Forbidden;
-
-                        var result = JsonSerializer.Serialize(new
-                        {
-                            statusCode = StatusCodes.Status403Forbidden,
-                            message = "forbidden"
-                        });
-
-                        await context.Response.WriteAsync(result);
-                    }
-                };
             });
 
         builder.Services.AddAuthorization();
 
+        // Repositories
+        builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+        builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+
+        // Services
         builder.Services.AddScoped<IJwtService, JwtService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
-        builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-
-        builder.Services.AddScoped<IHomeRepository, HomeRepository>();
-
-        builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();    
-        builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
-        builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();  
-
-        builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
-        builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
-        builder.Services.AddScoped<ICheckoutPaymentRepository, CheckoutPaymentRepository>();
-        builder.Services.AddScoped<ICheckoutPaymentService, CheckoutPaymentService>();
-        builder.Services.AddScoped<ICheckoutSummaryRepository, CheckoutSummaryRepository>();
-        builder.Services.AddScoped<ICheckoutSummaryService, CheckoutSummaryService>();
-        builder.Services.AddScoped<IPlaceOrderRepository, PlaceOrderRepository>();
-        builder.Services.AddScoped<IPlaceOrderService, PlaceOrderService>();
-
-        builder.Services.AddScoped<IProductRepository, ProductRepository>();
-        builder.Services.AddScoped<IProductService, ProductService>();
-        builder.Services.AddScoped<ICartRepository, CartRepository>();
-        builder.Services.AddScoped<ICartService, CartService>();
+        builder.Services.AddScoped<IBrandService, BrandService>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
+        builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
 
         builder.Services.AddControllers();
 
         builder.Services.AddEndpointsApiExplorer();
-
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy("AllowTester", policy =>
-                policy.AllowAnyOrigin()
-                      .AllowAnyMethod()
-                      .AllowAnyHeader()
-                      .WithExposedHeaders("X-Session-Id"));
-        });
 
         builder.Services.AddSwaggerGen(options =>
         {
@@ -145,30 +93,32 @@ public class Program
                 Version = "v1"
             });
 
-            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Name = "Authorization",
-                Type = SecuritySchemeType.Http,
-                Scheme = "bearer",
-                BearerFormat = "JWT",
-                In = ParameterLocation.Header,
-                Description = "Bearer {token}"
-            });
-
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
+            options.AddSecurityDefinition("Bearer",
+                new OpenApiSecurityScheme
                 {
-                    new OpenApiSecurityScheme
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter your JWT token."
+                });
+
+            options.AddSecurityRequirement(
+                new OpenApiSecurityRequirement
+                {
                     {
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-            });
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
         });
 
         var app = builder.Build();
@@ -188,8 +138,6 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
-
-        app.UseCors("AllowTester");
 
         app.Run();
     }
