@@ -125,6 +125,8 @@ public class Program
         builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<ICartRepository, CartRepository>();
         builder.Services.AddScoped<ICartService, CartService>();
+        builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+        builder.Services.AddScoped<IWishlistService, WishlistService>();
 
         builder.Services.AddControllers();
 

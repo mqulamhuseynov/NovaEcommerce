@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NovaEcommerce.DataAccess.DbContext;
 
@@ -11,9 +12,11 @@ using NovaEcommerce.DataAccess.DbContext;
 namespace NovaEcommerce.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260715085740_WishlistChanges")]
+    partial class WishlistChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -490,13 +493,6 @@ namespace NovaEcommerce.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PaymentMethodId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PaymentType")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -524,8 +520,6 @@ namespace NovaEcommerce.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PaymentMethodId");
 
                     b.HasIndex("UserId");
 
@@ -1432,16 +1426,10 @@ namespace NovaEcommerce.DataAccess.Migrations
 
             modelBuilder.Entity("NovaEcommerce.Domain.Entities.CheckoutSession", b =>
                 {
-                    b.HasOne("NovaEcommerce.Domain.Entities.PaymentMethod", "PaymentMethod")
-                        .WithMany()
-                        .HasForeignKey("PaymentMethodId");
-
                     b.HasOne("NovaEcommerce.Domain.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("PaymentMethod");
 
                     b.Navigation("User");
                 });
