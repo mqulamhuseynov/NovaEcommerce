@@ -1,6 +1,6 @@
 ﻿using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.Domain.Enums;
-using NovaEcommerce.ServicesApp.DTOs.Checkout;
+using NovaEcommerce.ServicesApp.DTOs.Checkout.CheckoutShipping;
 using NovaEcommerce.ServicesApp.DTOs.Responses;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;

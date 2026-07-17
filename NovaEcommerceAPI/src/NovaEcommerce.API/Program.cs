@@ -103,12 +103,24 @@ public class Program
         builder.Services.AddScoped<IJwtService, JwtService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
         builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+
         builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();    
         builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
         builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();  
+
         builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
         builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
+        builder.Services.AddScoped<ICheckoutPaymentRepository, CheckoutPaymentRepository>();
+        builder.Services.AddScoped<ICheckoutPaymentService, CheckoutPaymentService>();
+        builder.Services.AddScoped<ICheckoutSummaryRepository, CheckoutSummaryRepository>();
+        builder.Services.AddScoped<ICheckoutSummaryService, CheckoutSummaryService>();
+        builder.Services.AddScoped<IPlaceOrderRepository, PlaceOrderRepository>();
+        builder.Services.AddScoped<IPlaceOrderService, PlaceOrderService>();
+        builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+        builder.Services.AddScoped<IAddressService, AddressService>();  
+
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<ICartRepository, CartRepository>();

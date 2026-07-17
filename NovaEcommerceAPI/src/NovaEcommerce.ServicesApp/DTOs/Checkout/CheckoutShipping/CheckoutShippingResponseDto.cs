@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NovaEcommerce.ServicesApp.DTOs.Checkout
+namespace NovaEcommerce.ServicesApp.DTOs.Checkout.CheckoutShipping
 {
     public class CheckoutShippingResponseDto
     {

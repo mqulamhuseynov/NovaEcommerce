@@ -24,6 +24,10 @@ namespace NovaEcommerce.DataAccess.Configurations
                 .HasConversion<string>()
                 .HasMaxLength(20);
 
+            builder.Property(x => x.PaymentType)
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
 
             builder.Property(x => x.ShippingCost)
                 .HasColumnType("decimal(18,2)");

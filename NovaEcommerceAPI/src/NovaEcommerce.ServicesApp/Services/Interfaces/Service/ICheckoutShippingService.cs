@@ -1,5 +1,4 @@
-﻿
-using NovaEcommerce.ServicesApp.DTOs.Checkout;
+﻿using NovaEcommerce.ServicesApp.DTOs.Checkout.CheckoutShipping;
 using NovaEcommerce.ServicesApp.DTOs.Responses;
 using System;
 using System.Collections.Generic;

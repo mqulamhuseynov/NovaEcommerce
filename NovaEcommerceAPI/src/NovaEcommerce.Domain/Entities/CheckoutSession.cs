@@ -28,6 +28,9 @@ namespace NovaEcommerce.Domain.Entities
         public decimal ShippingCost { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ExpiresAt { get; set; }
+        public PaymentType? PaymentType { get; set; }
+        public int? PaymentMethodId { get; set; }    
+        public PaymentMethod? PaymentMethod { get; set; }   
 
         public AppUser? User { get; set; }
     }
