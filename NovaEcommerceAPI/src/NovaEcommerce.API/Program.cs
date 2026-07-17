@@ -73,6 +73,18 @@ public class Program
         // Repositories
         builder.Services.AddScoped<IBrandRepository, BrandRepository>();
         builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+        builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+        builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+        builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();
+        builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
+        builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
+        builder.Services.AddScoped<ICheckoutPaymentRepository, CheckoutPaymentRepository>();
+        builder.Services.AddScoped<ICheckoutSummaryRepository, CheckoutSummaryRepository>();
+        builder.Services.AddScoped<IPlaceOrderRepository, PlaceOrderRepository>();
+        builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
+        builder.Services.AddScoped<ICartRepository, CartRepository>();
+        builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
 
         // Services
         builder.Services.AddScoped<IJwtService, JwtService>();
@@ -80,6 +92,15 @@ public class Program
         builder.Services.AddScoped<IBrandService, BrandService>();
         builder.Services.AddScoped<IOrderService, OrderService>();
         builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+        builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();
+        builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
+        builder.Services.AddScoped<ICheckoutPaymentService, CheckoutPaymentService>();
+        builder.Services.AddScoped<ICheckoutSummaryService, CheckoutSummaryService>();
+        builder.Services.AddScoped<IPlaceOrderService, PlaceOrderService>();
+        builder.Services.AddScoped<IAddressService, AddressService>();
+        builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<ICartService, CartService>();
+        builder.Services.AddScoped<IWishlistService, WishlistService>();
 
         builder.Services.AddControllers();
 
