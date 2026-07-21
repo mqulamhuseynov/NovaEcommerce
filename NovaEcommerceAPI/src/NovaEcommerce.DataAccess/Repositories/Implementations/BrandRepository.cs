@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NovaEcommerce.DataAccess.DbContext;
-using NovaEcommerce.DataAccess.Repositories.Interfaces;
 using NovaEcommerce.Domain.Entities;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 
 namespace NovaEcommerce.DataAccess.Repositories.Implementations;
 

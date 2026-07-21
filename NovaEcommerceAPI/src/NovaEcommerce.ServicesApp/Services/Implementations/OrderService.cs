@@ -1,193 +1,158 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NovaEcommerce.DataAccess.DbContext;
-using NovaEcommerce.Domain.Entities;
+﻿using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.Domain.Enums;
 using NovaEcommerce.ServicesApp.DTOs;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.DTOs.Order;
+using NovaEcommerce.ServicesApp.DTOs.Responses;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 
 namespace NovaEcommerce.ServicesApp.Services.Implementations;
 
-public class OrderService : IOrderService
+public class OrderService(IOrderRepository repository, ICartRepository cartRepository) : IOrderService
 {
-    private readonly AppDbContext _context;
-
-    public OrderService(AppDbContext context)
+    public async Task<ApiResponse<OrderHistoryDto>> GetOrdersAsync(
+        int userId, string? status, string? search, int page, int limit)
     {
-        _context = context;
-    }
-    public async Task<ApiResponseDto<OrderHistoryDto>> GetOrdersAsync(
-    int userId,
-    string? status,
-    string? search,
-    int page,
-    int limit)
-    {
-        var query =
-            _context.Orders
-                .Include(x => x.Items)
-                .Where(x => x.UserId == userId)
-                .AsQueryable();
+        page = page < 1 ? 1 : page;
+        limit = limit is < 1 or > 100 ? 20 : limit;
 
-        if (!string.IsNullOrWhiteSpace(status) &&
-            status.ToLower() != "all")
+        OrderStatus? parsedStatus = null;
+        if (!string.IsNullOrWhiteSpace(status) && status.ToLower() != "all")
         {
-            query =
-                query.Where(x =>
-                    x.Status.ToString().ToLower() ==
-                    status.ToLower());
+            if (!Enum.TryParse<OrderStatus>(status, true, out var parsed))
+                return ApiResponse<OrderHistoryDto>.FailResponse($"Invalid status value: {status}", 400);
+
+            parsedStatus = parsed;
         }
 
-        if (!string.IsNullOrWhiteSpace(search))
+        var (orders, totalCount) = await repository.GetOrders(userId, parsedStatus, search, page, limit);
+
+        var result = new OrderHistoryDto
         {
-            query =
-                query.Where(x =>
-                    x.OrderNumber.Contains(search) ||
-
-                    x.Items.Any(i =>
-                        i.ProductNameSnapshot.Contains(search)));
-        }
-
-        var totalCount =
-            await query.CountAsync();
-
-        var orders =
-            await query
-                .OrderByDescending(x => x.PlacedAt)
-                .Skip((page - 1) * limit)
-                .Take(limit)
-                .ToListAsync();
-
-        var data =
-            orders.Select(x => new OrderResponseDto
+            Orders = orders.Select(MapToResponseDto).ToList(),
+            Pagination = new PaginationDto
             {
-                OrderNumber = x.OrderNumber,
+                Page = page,
+                Limit = limit,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling((double)totalCount / limit)
+            }
+        };
+
+        return ApiResponse<OrderHistoryDto>.SuccessResponse(result, "Orders fetched successfully");
+    }
+
+    public async Task<ApiResponse<OrderResponseDto>> GetOrderDetailAsync(int userId, string orderNumber)
+    {
+        var order = await repository.GetOrderDetail(userId, orderNumber);
+        if (order is null)
+            return ApiResponse<OrderResponseDto>.FailResponse("Order not found", 404);
+
+        return ApiResponse<OrderResponseDto>.SuccessResponse(MapToResponseDto(order), "Order detail");
+    }
+
+    public async Task<ApiResponse<OrderTrackingDto>> GetTrackingAsync(int userId, string orderNumber)
+    {
+        var order = await repository.GetOrderTracking(userId, orderNumber);
+        if (order is null)
+            return ApiResponse<OrderTrackingDto>.FailResponse("Order not found", 404);
+
+        var timeline = order.StatusHistory
+            .OrderBy(x => x.ChangedAt)
+            .Select(x => new TrackingStepDto
+            {
                 Status = x.Status.ToString(),
-                Total = x.Total,
-                PlacedAt = x.PlacedAt,
+                Date = x.ChangedAt,
+                Completed = true,
+                Active = x.Status == order.Status
+            })
+            .ToList();
 
-                Items =
-                    x.Items.Select(i => new OrderItemDto
-                    {
-                        ProductName = i.ProductNameSnapshot,
-                        Color = i.ColorSnapshot,
-                        Size = i.SizeSnapshot,
-                        Price = i.PriceSnapshot,
-                        Quantity = i.Quantity
-                    }).ToList()
+        var result = new OrderTrackingDto { OrderNumber = order.OrderNumber, Timeline = timeline };
+        return ApiResponse<OrderTrackingDto>.SuccessResponse(result, "Tracking information");
+    }
 
-            }).ToList();
+    public async Task<ApiResponse<string>> ReorderAsync(int userId, int orderId)
+    {
+        var order = await repository.GetOrderForReorder(userId, orderId);
+        if (order is null)
+            return ApiResponse<string>.FailResponse("Order not found", 404);
 
-        return new ApiResponseDto<OrderHistoryDto>
+        var cart = await cartRepository.GetOrCreateCart(userId, null);
+
+        var skippedItems = new List<string>();
+
+        foreach (var item in order.Items)
         {
-            Success = true,
-            Message = "Orders fetched successfully",
+            var variant = await cartRepository.GetProductVariant(item.ProductVariantId);
 
-            Data = new OrderHistoryDto
+            if (variant is null || variant.StockQuantity < item.Quantity)
             {
-                Orders = data,
-
-                Pagination = new PaginationDto
-                {
-                    Page = page,
-                    Limit = limit,
-                    TotalCount = totalCount,
-                    TotalPages =
-                        (int)Math.Ceiling(
-                            (double)totalCount / limit)
-                }
+                skippedItems.Add(item.ProductNameSnapshot);
+                continue;
             }
-        };
-    }
-    public async Task<ApiResponseDto<OrderResponseDto>>
-GetOrderDetailAsync(
-    int userId,
-    string orderNumber)
-    {
-        var order =
-            await _context.Orders
-                .Include(x => x.Items)
-                .Include(x => x.StatusHistory)
-                .FirstOrDefaultAsync(x =>
-                    x.UserId == userId &&
-                    x.OrderNumber == orderNumber);
 
-        if (order == null)
-            throw new Exception("Order not found.");
+            var existing = await cartRepository.GetCartItemByVariant(cart.Id, item.ProductVariantId);
 
-        var dto =
-            new OrderResponseDto
+            if (existing is not null)
             {
-                OrderNumber = order.OrderNumber,
-                Status = order.Status.ToString(),
-                Total = order.Total,
-                PlacedAt = order.PlacedAt,
-
-                Items =
-                    order.Items.Select(i => new OrderItemDto
-                    {
-                        ProductName = i.ProductNameSnapshot,
-                        Color = i.ColorSnapshot,
-                        Size = i.SizeSnapshot,
-                        Price = i.PriceSnapshot,
-                        Quantity = i.Quantity
-                    }).ToList()
-            };
-
-        return new ApiResponseDto<OrderResponseDto>
-        {
-            Success = true,
-            Message = "Order detail",
-
-            Data = dto
-        };
-    }
-    public async Task<ApiResponseDto<OrderTrackingDto>>
-GetTrackingAsync(
-    int userId,
-    string orderNumber)
-    {
-        var order =
-            await _context.Orders
-                .Include(x => x.StatusHistory)
-                .FirstOrDefaultAsync(x =>
-                    x.UserId == userId &&
-                    x.OrderNumber == orderNumber);
-
-        if (order == null)
-            throw new Exception("Order not found.");
-
-        var timeline =
-            order.StatusHistory
-                .OrderBy(x => x.ChangedAt)
-                .Select(x => new TrackingStepDto
-                {
-                    Status = x.Status.ToString(),
-                    Date = x.ChangedAt,
-                    Completed = true,
-                    Active = x.Status == order.Status
-                })
-                .ToList();
-
-        return new ApiResponseDto<OrderTrackingDto>
-        {
-            Success = true,
-            Message = "Tracking information",
-
-            Data = new OrderTrackingDto
-            {
-                OrderNumber = order.OrderNumber,
-                Timeline = timeline
+                existing.Quantity += item.Quantity;
             }
-        };
-    }
-    public async Task AdvanceStatusAsync(string orderNumber)
-    {
-        var order = await _context.Orders
-            .Include(x => x.StatusHistory)
-            .FirstOrDefaultAsync(x => x.OrderNumber == orderNumber);
+            else
+            {
+                cartRepository.AddCartItem(new CartItem
+                {
+                    CartId = cart.Id,
+                    ProductVariantId = item.ProductVariantId,
+                    Quantity = item.Quantity,
+                    AddedAt = DateTime.UtcNow
+                });
+            }
+        }
 
-        if (order == null)
-            throw new Exception("Order not found.");
+        await cartRepository.SaveChangesAsync();
+
+        var message = skippedItems.Count == 0
+            ? "All items added to cart"
+            : $"Added to cart. Unavailable: {string.Join(", ", skippedItems)}";
+
+        return ApiResponse<string>.SuccessResponse("OK", message);
+    }
+
+    public async Task<ApiResponse<InvoiceDto>> GetInvoiceAsync(int userId, string orderNumber)
+    {
+        var order = await repository.GetOrderInvoice(userId, orderNumber);
+        if (order is null)
+            return ApiResponse<InvoiceDto>.FailResponse("Order not found", 404);
+
+        var invoice = new InvoiceDto
+        {
+            OrderNumber = order.OrderNumber,
+            CustomerName = $"{order.User!.FirstName} {order.User.LastName}",
+            Subtotal = order.Subtotal,
+            Shipping = order.ShippingCost,
+            Tax = order.Tax,
+            Discount = order.Discount,
+            Total = order.Total,
+            PlacedAt = order.PlacedAt,
+            Items = order.Items.Select(i => new OrderItemDto
+            {
+                ProductName = i.ProductNameSnapshot,
+                Color = i.ColorSnapshot,
+                Size = i.SizeSnapshot,
+                Price = i.PriceSnapshot,
+                Quantity = i.Quantity
+            }).ToList()
+        };
+
+        return ApiResponse<InvoiceDto>.SuccessResponse(invoice, "Invoice");
+    }
+
+    public async Task<ApiResponse<bool>> AdvanceStatusAsync(string orderNumber)
+    {
+        var order = await repository.GetOrderByNumber(orderNumber);
+        if (order is null)
+            return ApiResponse<bool>.FailResponse("Order not found", 404);
 
         OrderStatus? nextStatus = order.Status switch
         {
@@ -197,140 +162,36 @@ GetTrackingAsync(
             _ => null
         };
 
-        if (nextStatus == null)
-            throw new Exception("Order already completed.");
+        if (nextStatus is null)
+            return ApiResponse<bool>.FailResponse("Order already completed", 400);
 
         order.Status = nextStatus.Value;
 
-        _context.OrderStatusHistories.Add(new OrderStatusHistory
+        repository.AddOrderStatusHistory(new OrderStatusHistory
         {
             OrderId = order.Id,
             Status = nextStatus.Value,
             ChangedAt = DateTime.UtcNow
         });
 
-        await _context.SaveChangesAsync();
+        await repository.SaveChangesAsync();
+
+        return ApiResponse<bool>.SuccessResponse(true, $"Order advanced to {nextStatus}");
     }
-    public async Task<ApiResponseDto<string>> ReorderAsync(
-    int userId,
-    int orderId)
+
+    private static OrderResponseDto MapToResponseDto(Order order) => new()
     {
-        var order = await _context.Orders
-            .Include(x => x.Items)
-            .FirstOrDefaultAsync(x =>
-                x.Id == orderId &&
-                x.UserId == userId);
-
-        if (order == null)
-            throw new Exception("Order not found.");
-
-        var cart = await _context.Carts
-            .Include(x => x.Items)
-            .FirstOrDefaultAsync(x => x.UserId == userId);
-
-        if (cart == null)
+        OrderNumber = order.OrderNumber,
+        Status = order.Status.ToString(),
+        Total = order.Total,
+        PlacedAt = order.PlacedAt,
+        Items = order.Items.Select(i => new OrderItemDto
         {
-            cart = new Cart
-            {
-                UserId = userId
-            };
-
-            _context.Carts.Add(cart);
-
-            await _context.SaveChangesAsync();
-        }
-
-        foreach (var item in order.Items)
-        {
-            var variant =
-                await _context.ProductVariants
-                    .FirstOrDefaultAsync(x =>
-                        x.Id == item.ProductVariantId);
-
-            if (variant == null)
-                continue;
-
-            if (variant.StockQuantity < item.Quantity)
-                continue;
-
-            var existing =
-                cart.Items.FirstOrDefault(x =>
-                    x.ProductVariantId == item.ProductVariantId);
-
-            if (existing == null)
-            {
-                cart.Items.Add(new CartItem
-                {
-                    ProductVariantId = item.ProductVariantId,
-                    Quantity = item.Quantity,
-                    AddedAt = DateTime.UtcNow
-                });
-            }
-            else
-            {
-                existing.Quantity += item.Quantity;
-            }
-        }
-
-        await _context.SaveChangesAsync();
-
-        return new ApiResponseDto<string>
-        {
-            Success = true,
-            Message = "Products added to cart.",
-            Data = "OK"
-        };
-    }
-    public async Task<ApiResponseDto<InvoiceDto>>
-GetInvoiceAsync(
-    int userId,
-    string orderNumber)
-    {
-        var order =
-            await _context.Orders
-                .Include(x => x.User)
-                .Include(x => x.Items)
-                .FirstOrDefaultAsync(x =>
-                    x.UserId == userId &&
-                    x.OrderNumber == orderNumber);
-
-        if (order == null)
-            throw new Exception("Order not found.");
-
-        var invoice =
-            new InvoiceDto
-            {
-                OrderNumber = order.OrderNumber,
-
-                CustomerName =
-                    order.User!.FirstName + " " +
-                    order.User.LastName,
-
-                Subtotal = order.Subtotal,
-                Shipping = order.ShippingCost,
-                Tax = order.Tax,
-                Discount = order.Discount,
-                Total = order.Total,
-                PlacedAt = order.PlacedAt,
-
-                Items =
-                    order.Items.Select(i =>
-                        new OrderItemDto
-                        {
-                            ProductName = i.ProductNameSnapshot,
-                            Color = i.ColorSnapshot,
-                            Size = i.SizeSnapshot,
-                            Price = i.PriceSnapshot,
-                            Quantity = i.Quantity
-                        }).ToList()
-            };
-
-        return new ApiResponseDto<InvoiceDto>
-        {
-            Success = true,
-            Message = "Invoice",
-
-            Data = invoice
-        };
-    }
+            ProductName = i.ProductNameSnapshot,
+            Color = i.ColorSnapshot,
+            Size = i.SizeSnapshot,
+            Price = i.PriceSnapshot,
+            Quantity = i.Quantity
+        }).ToList()
+    };
 }
