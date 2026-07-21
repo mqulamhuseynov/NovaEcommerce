@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NovaEcommerce.ServicesApp.DTOs.Order
+{
+    public class OrderTrackingDto
+    {
+        public string OrderNumber { get; set; } = null!;
+        public List<TrackingStepDto> Timeline { get; set; } = new();
+    }
+}

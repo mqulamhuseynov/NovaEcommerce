@@ -1,7 +1,8 @@
-﻿using NovaEcommerce.DataAccess.Repositories.Interfaces;
+﻿
 using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.ServicesApp.DTOs.PaymentMethods;
 using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 
 namespace NovaEcommerce.ServicesApp.Services.Implementations;
 

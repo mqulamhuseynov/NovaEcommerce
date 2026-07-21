@@ -1,7 +1,8 @@
-﻿using NovaEcommerce.DataAccess.Repositories.Interfaces;
+﻿
 using NovaEcommerce.Domain.Enums;
 using NovaEcommerce.ServicesApp.DTOs.Brands;
-using NovaEcommerce.ServicesApp.Services.Interfaces;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
+using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 
 namespace NovaEcommerce.ServicesApp.Services.Implementations;
 

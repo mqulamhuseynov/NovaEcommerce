@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using NovaEcommerce.ServicesApp.DTOs.Checkout.CheckoutPayment;
 using NovaEcommerce.ServicesApp.DTOs.Checkout.CheckoutShipping;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace NovaEcommerce.API.Controllers
