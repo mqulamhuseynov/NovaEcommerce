@@ -22,10 +22,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        Env.Load();
-
-        var connection =
-            Environment.GetEnvironmentVariable("DATABASE");
+        var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(connection));
@@ -106,9 +103,9 @@ public class Program
 
         builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 
-        builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();    
+        builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();
         builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
-        builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();  
+        builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();
 
         builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
         builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
@@ -119,17 +116,15 @@ public class Program
         builder.Services.AddScoped<IPlaceOrderRepository, PlaceOrderRepository>();
         builder.Services.AddScoped<IPlaceOrderService, PlaceOrderService>();
         builder.Services.AddScoped<IAddressRepository, AddressRepository>();
-        builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
-        builder.Services.AddScoped<IReviewService, ReviewService>();
         builder.Services.AddScoped<IAddressService, AddressService>();  
-        builder.Services.AddScoped<IReturnRequestRepository, ReturnRequestRepository>();    
-        builder.Services.AddScoped<IReturnRequestService, ReturnRequestService>();  
 
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<ICartRepository, CartRepository>();
         builder.Services.AddScoped<ICartService, CartService>();
         builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IFileStorageService, FileStorageService>();
         builder.Services.AddScoped<IWishlistService, WishlistService>();
 
         builder.Services.AddControllers();
@@ -191,15 +186,17 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseStaticFiles();
+
         app.UseMiddleware<ExceptionMiddleware>();
 
         app.UseAuthentication();
 
         app.UseAuthorization();
 
-        app.MapControllers();
-
         app.UseCors("AllowTester");
+
+        app.MapControllers();
 
         app.Run();
     }
