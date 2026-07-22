@@ -119,6 +119,8 @@ public class Program
         builder.Services.AddScoped<IPlaceOrderRepository, PlaceOrderRepository>();
         builder.Services.AddScoped<IPlaceOrderService, PlaceOrderService>();
         builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+        builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+        builder.Services.AddScoped<IReviewService, ReviewService>();
         builder.Services.AddScoped<IAddressService, AddressService>();  
         builder.Services.AddScoped<IReturnRequestRepository, ReturnRequestRepository>();    
         builder.Services.AddScoped<IReturnRequestService, ReturnRequestService>();  
