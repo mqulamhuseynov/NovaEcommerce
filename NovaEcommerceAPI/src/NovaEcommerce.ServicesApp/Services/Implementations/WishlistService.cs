@@ -12,7 +12,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
     {
         public async Task<ApiResponse<WishlistItemDto>> AddItem(int userId, int wishlistId, AddWishlistItemRequestDto request)
         {
-           var wishlist = await repository.GetWishlistsById(userId, wishlistId);
+            var wishlist = await repository.GetWishlistsById(userId, wishlistId);
             if (wishlist is null) return ApiResponse<WishlistItemDto>.FailResponse("wishlist not found", 404);
 
             var variant = await repository.GetProductVariant(request.ProductVariantId);
@@ -51,7 +51,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             await repository.SaveChangesAsync();
 
             return ApiResponse<WishlistDto>.SuccessResponse(new WishlistDto { Id = newWishlist.Id, ItemCount = 0, Name = newWishlist.Name }, "Wishlist created", 201);
-                
+
         }
 
         public async Task<ApiResponse<IReadOnlyCollection<WishlistItemDto>>> GetWishlistItems(int userId, int wishlistId)
@@ -88,9 +88,9 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             repository.RemoveWishlistItem(item);
             await repository.SaveChangesAsync();
 
-            var updatedWishlist = await repository.GetWishlistsById(userId,wishlistId);
+            var updatedWishlist = await repository.GetWishlistsById(userId, wishlistId);
             var dto = updatedWishlist!.Items.Select(MapToDto).ToList();
-            return ApiResponse<List<WishlistItemDto>>.SuccessResponse(dto,"removed from wishlist",204);
+            return ApiResponse<List<WishlistItemDto>>.SuccessResponse(dto, "removed from wishlist", 204);
         }
 
         public async Task<ApiResponse<bool>> RequestNotify(int userId, int wishlistId, int itemId)
@@ -113,14 +113,14 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         {
             var wishlistById = await repository.GetWishlistsById(userId, wishlistId);
 
-            if (wishlistById is null) 
+            if (wishlistById is null)
             {
                 return ApiResponse<WishlistShareUrlDto>.FailResponse("wishlist is null", 404);
             }
 
             if (wishlistById.ShareToken is null) //eger token yoxdursa guid.tostring ile yenisin yaradirig ve repoda saveliyirik.
             {
-             wishlistById.ShareToken = Guid.NewGuid().ToString("N");
+                wishlistById.ShareToken = Guid.NewGuid().ToString("N");
                 await repository.SaveChangesAsync();
             }
 
