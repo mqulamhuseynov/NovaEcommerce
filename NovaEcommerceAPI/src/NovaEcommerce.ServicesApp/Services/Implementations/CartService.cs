@@ -32,7 +32,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             var existingItem = await repository.GetCartItemByVariant(cart.Id, request.ProductVariantId);
             var requestedTotalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
 
-            if (requestedTotalQuantity <= 0)
+            if (requestedTotalQuantity <= 0) 
                 return ApiResponse<CartDto>.FailResponse("Quantity must be greater than zero", 400);
 
             if (requestedTotalQuantity > variant.StockQuantity)
@@ -57,7 +57,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             await repository.SaveChangesAsync();
 
             var updatedCart = await repository.GetOrCreateCart(userId, sessionId);
-            return ApiResponse<CartDto>.SuccessResponse(MapToDto(updatedCart), "Product added to cart");
+            return ApiResponse<CartDto>.SuccessResponse(MapToDto(updatedCart), "Product added to cart");  
         }
 
         public async Task<ApiResponse<CartDto>> UpdateItemQuantityAsync(int? userId, string? sessionId, int cartItemId, int quantity)

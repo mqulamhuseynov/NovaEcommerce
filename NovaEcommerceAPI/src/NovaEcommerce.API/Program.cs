@@ -120,6 +120,8 @@ public class Program
         builder.Services.AddScoped<IPlaceOrderService, PlaceOrderService>();
         builder.Services.AddScoped<IAddressRepository, AddressRepository>();
         builder.Services.AddScoped<IAddressService, AddressService>();  
+        builder.Services.AddScoped<IReturnRequestRepository, ReturnRequestRepository>();    
+        builder.Services.AddScoped<IReturnRequestService, ReturnRequestService>();  
 
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductService, ProductService>();
@@ -129,6 +131,8 @@ public class Program
         builder.Services.AddScoped<IWishlistService, WishlistService>();
 
         builder.Services.AddControllers();
+
+        builder.Services.AddHttpContextAccessor();
 
         builder.Services.AddEndpointsApiExplorer();
 
