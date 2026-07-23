@@ -22,8 +22,4 @@
     <ProjectReference Include="..\NovaEcommerce.ServicesApp\NovaEcommerce.ServicesApp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>
