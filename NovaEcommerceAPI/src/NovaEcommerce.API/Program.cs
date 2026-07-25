@@ -223,6 +223,8 @@ public class Program
 
         app.MapControllers();
 
+        app.MapGet("/", () => Results.Redirect("/swagger"));
+
         app.Run();
     }
 }
