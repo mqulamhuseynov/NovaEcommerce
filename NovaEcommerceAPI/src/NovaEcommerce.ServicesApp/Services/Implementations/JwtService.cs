@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,23 +10,28 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations;
 
 public class JwtService : IJwtService
 {
+    private readonly IConfiguration _configuration;
+
+    // IConfiguration-u Constructor vasitəsilə inject edirik
+    public JwtService(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     public string GenerateAccessToken(AppUser user)
     {
-        var jwtSecret =
-            Environment.GetEnvironmentVariable("JWT_SECRET");
+        var jwtSecret = _configuration["JwtSettings:Secret"];
 
         if (string.IsNullOrEmpty(jwtSecret))
         {
-            throw new Exception("check .env");
+            throw new Exception("Check appsettings.json - JWT Secret is missing.");
         }
 
-        var expireText =
-            Environment.GetEnvironmentVariable("JWT_ACCESS_EXPIRES") ?? "15m";
+        var expireText = _configuration["JwtSettings:AccessExpires"] ?? "15m";
 
         expireText = expireText.Replace("m", "");
 
-        var jwtExpireMinutes =
-            Convert.ToDouble(expireText);
+        var jwtExpireMinutes = Convert.ToDouble(expireText);
 
         var claims = new List<Claim>
         {
@@ -40,7 +46,7 @@ public class JwtService : IJwtService
         };
 
         var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(jwtSecret!));
+            Encoding.UTF8.GetBytes(jwtSecret));
 
         var credentials = new SigningCredentials(
             key,
@@ -65,8 +71,7 @@ public class JwtService : IJwtService
 
     public ClaimsPrincipal? GetPrincipalFromExpiredToken(string token)
     {
-        var jwtSecret =
-            Environment.GetEnvironmentVariable("JWT_SECRET");
+        var jwtSecret = _configuration["JwtSettings:Secret"];
 
         var parameters = new TokenValidationParameters
         {

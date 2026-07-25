@@ -24,11 +24,20 @@ public class Program
 
         Env.Load();
 
-        var connection =
-            Environment.GetEnvironmentVariable("DATABASE");
+        var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(connection));
+            options.UseSqlServer(connectionString, sqlOptions =>
+            {
+                // Uzaq server kəsilmələri üçün yenidən cəhd mexanizmi:
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(10),
+                    errorNumbersToAdd: null);
+
+                // Şəbəkə gecikmələri üçün gözləmə müddətini 60 saniyəyə qaldırırıq:
+                sqlOptions.CommandTimeout(60);
+            }));
 
         builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
         {
@@ -41,8 +50,8 @@ public class Program
         .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
 
-        var jwtSecret =
-            Environment.GetEnvironmentVariable("JWT_SECRET");
+        var jwtSecret = builder.Configuration["JwtSettings:Secret"];
+            
 
         builder.Services
             .AddAuthentication(options =>
@@ -186,11 +195,9 @@ public class Program
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
-        {
             app.UseSwagger();
             app.UseSwaggerUI();
-        }
+
 
         app.UseHttpsRedirection();
 
