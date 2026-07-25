@@ -1,4 +1,6 @@
 ﻿using DotNetEnv;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,8 @@ using NovaEcommerce.API.Middleware;
 using NovaEcommerce.DataAccess.DbContext;
 using NovaEcommerce.DataAccess.Repositories.Implementations;
 using NovaEcommerce.Domain.Entities;
+using NovaEcommerce.ServicesApp.FluentValidation;
+using NovaEcommerce.ServicesApp.FluentValidations;
 using NovaEcommerce.ServicesApp.Services.Implementations;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
@@ -21,6 +25,12 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddFluentValidationAutoValidation();
+
+        builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
+        
+        builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
 
         Env.Load();
 
