@@ -14,6 +14,7 @@ public class AuthService : IAuthService
     private readonly IJwtService _jwtService;
     private readonly IRefreshTokenRepository _refreshTokenRepository;
 
+    private const int days = 7;
     public AuthService(
         UserManager<AppUser> userManager,
         IJwtService jwtService,
@@ -37,8 +38,6 @@ public class AuthService : IAuthService
 
     private async Task SaveRefreshTokenAsync(AppUser user, string refreshToken)
     {
-        var days = int.Parse(
-            Environment.GetEnvironmentVariable("REFRESH_TOKEN_EXPIRES_DAYS") ?? "7");
 
         var token = new RefreshToken
         {
