@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NovaEcommerce.ServicesApp.DTOs;
+using NovaEcommerce.ServicesApp.DTOs.Responses;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 
 namespace NovaEcommerce.API.Controllers
@@ -16,6 +18,8 @@ namespace NovaEcommerce.API.Controllers
         }
 
         [HttpGet("hero-banners")]
+        [ProducesResponseType(typeof(ApiResponse<HeroBannerDto>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<HeroBannerDto>), 404)]
         public async Task<IActionResult> GetHeroBanners()
         {
             var result = await _service.TGetHeroBannersAsync();

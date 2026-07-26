@@ -23,6 +23,7 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
         public async Task<FlashSale?> GetActiveAsync()
         {
             var data = await _context.FlashSales
+                .AsNoTracking()
                             .Include(x=>x.Items)
                             .ThenInclude(x=>x.ProductVariant)
                             .ThenInclude(x=>x.Product)
@@ -43,7 +44,7 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
 
         public async Task<List<FlashSale>> GetUpComingAsync()
         {
-            var data = await _context.FlashSales
+            var data = await _context.FlashSales.AsNoTracking()
                             .Include(x=>x.Items)
                             .ThenInclude(x=>x.ProductVariant)
                             .ThenInclude(x=>x.Product)

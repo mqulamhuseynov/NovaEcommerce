@@ -50,7 +50,12 @@ namespace NovaEcommerce.API.Controllers
         [HttpPost("{orderNumber}/advance-status")]
         public async Task<IActionResult> AdvanceStatus(string orderNumber)
         {
-            var result = await orderService.AdvanceStatusAsync(orderNumber);
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdString, out int userId))
+            {
+                return Unauthorized();
+            }
+            var result = await orderService.AdvanceStatusAsync(userId,orderNumber);
             return StatusCode(result.StatusCode, result);
         }
 

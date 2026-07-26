@@ -27,10 +27,11 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
         public async Task<ApiResponse<string>> CreateAsync(int userId, CreateRequestReturnDto dto)
         {
-            var orderItem = await _repository.GetOrderItemAsync(userId);
+            var orderItem = await _repository.GetOrderItemForUserAsync(userId, dto.OrderItemId);
+
             if (orderItem == null)
             {
-                return ApiResponse<string>.FailResponse("Order Item not found", 404);
+                return ApiResponse<string>.FailResponse("Order Item not found or you don't have access.", 404);
             }
 
             if ((dto.ResolutionType == ResolutionType.Exchange) && string.IsNullOrWhiteSpace(dto.ExchangeSize))

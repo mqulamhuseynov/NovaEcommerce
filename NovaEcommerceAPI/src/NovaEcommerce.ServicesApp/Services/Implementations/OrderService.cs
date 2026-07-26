@@ -148,11 +148,13 @@ public class OrderService(IOrderRepository repository, ICartRepository cartRepos
         return ApiResponse<InvoiceDto>.SuccessResponse(invoice, "Invoice");
     }
 
-    public async Task<ApiResponse<bool>> AdvanceStatusAsync(string orderNumber)
+    public async Task<ApiResponse<bool>> AdvanceStatusAsync(int userId, string orderNumber)
     {
-        var order = await repository.GetOrderByNumber(orderNumber);
-        if (order is null)
-            return ApiResponse<bool>.FailResponse("Order not found", 404);
+        var order = await repository.GetOrderForUser(userId,orderNumber);
+        if (order is null) 
+        {
+            return ApiResponse<bool>.FailResponse("order not found",404);
+        }
 
         OrderStatus? nextStatus = order.Status switch
         {

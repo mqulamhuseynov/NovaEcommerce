@@ -40,7 +40,8 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             {
                 "price_asc" => query.OrderBy(p => p.Variants.Min(v => v.Price)),
                 "price_desc" => query.OrderByDescending(p => p.Variants.Max(v => v.Price)),
-                "newest" or _  => query.OrderBy(p => p.Name) //newest veya default olaraq ada görə sıralama
+                "newest" => query.OrderByDescending(p => p.CreatedAt),
+                _ => query.OrderBy(p => p.Name)
             };
 
             var totalCount = await query.CountAsync();

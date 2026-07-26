@@ -12,6 +12,7 @@ public interface IOrderRepository
     Task<Order?> GetOrderTracking(int userId, string orderNumber);
     Task<Order?> GetOrderForReorder(int userId, int orderId);
     Task<Order?> GetOrderInvoice(int userId, string orderNumber);
+    Task<Order?> GetOrderForUser(int userId, string OrderNumber); 
 
     Task<Order?> GetOrderByNumber(string orderNumber);
 

@@ -193,7 +193,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         private CartSummaryDto BuildSummary(Cart cart, Coupon? coupon, decimal subtotal)
         {
             var freeShippingThreshold = configuration.GetValue<decimal>("Cart:FreeShippingThreshold");
-            var standardShippingCost = configuration.GetValue<decimal>("Cart:StandardShippingCost");
+            var standardShippingCost = configuration.GetValue<decimal>("Cart:ShippingCost");
 
             var shipping = subtotal >= freeShippingThreshold ? 0 : standardShippingCost;
 

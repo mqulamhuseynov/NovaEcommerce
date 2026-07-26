@@ -16,6 +16,7 @@ namespace NovaEcommerce.ServicesApp.Services.Interfaces.Repository
         Task<ReturnRequest?> GetUserReturnRequestByIdAsync(int id, int userId);
 
         Task<OrderItem?> GetOrderItemAsync(int orderItemId);
+        Task<OrderItem?> GetOrderItemForUserAsync(int id, int userId);
 
         Task SaveChangesAsync();
     }
