@@ -70,7 +70,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         {
             var sale = await _flashSaleRepo.GetUpComingAsync();
 
-            if (sale == null)
+            if (sale == null || !sale.Any())
             {
                 return ApiResponse<List<UpcomingFlashSaleDto>>.FailResponse
                     (              

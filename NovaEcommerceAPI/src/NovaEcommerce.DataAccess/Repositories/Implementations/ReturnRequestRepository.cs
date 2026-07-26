@@ -51,6 +51,13 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
             return value;
         }
 
+        public async Task<OrderItem?> GetOrderItemForUserAsync(int userId, int orderItemId)
+        {
+            return await _context.OrderItems
+                .Include(oi => oi.Order)
+                .FirstOrDefaultAsync(oi => oi.Id == orderItemId && oi.Order.UserId == userId);
+        }
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();

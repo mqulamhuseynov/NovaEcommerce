@@ -13,6 +13,7 @@ using NovaEcommerce.Domain.Entities;
 using NovaEcommerce.ServicesApp.FluentValidation;
 using NovaEcommerce.ServicesApp.FluentValidations;
 using NovaEcommerce.ServicesApp.Services.Implementations;
+using NovaEcommerce.ServicesApp.Services.Interfaces;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
 using System.Text;
@@ -128,6 +129,13 @@ public class Program
         builder.Services.AddScoped<IFlashSaleNotifyRepository, FlashSaleNotifyRepository>();
         builder.Services.AddScoped<IFlashSaleRepository, FlashSaleRepository>();
         builder.Services.AddScoped<IFlashSaleService, FlashSaleService>();
+        builder.Services.AddScoped<IHomeService, HomeService>();
+        builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+        builder.Services.AddScoped<IBrandService, BrandService>();
+        builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+        builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+        builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
 
         builder.Services.AddScoped<ICheckoutShippingRepository, CheckoutShippingRepository>();
         builder.Services.AddScoped<ICheckoutShippingService, CheckoutShippingService>();
@@ -223,7 +231,7 @@ public class Program
 
         app.MapControllers();
 
-        app.MapGet("/", () => Results.Redirect("/swagger"));
+        app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 
         app.Run();
     }

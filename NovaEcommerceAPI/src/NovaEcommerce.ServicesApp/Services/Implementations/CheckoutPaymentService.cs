@@ -53,7 +53,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
                     return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("CVV is required.", 400);
                 }
 
-                if ((request.CVV.Length < 3 || request.CVV.Length > 4) && !request.CVV.All(char.IsDigit))
+                if ((request.CVV.Length < 3 || request.CVV.Length > 4) || !request.CVV.All(char.IsDigit))
                 {
                     return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("Invalid CVV.", 400);
                 }

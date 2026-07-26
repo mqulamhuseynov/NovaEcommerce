@@ -10,5 +10,5 @@ public interface IOrderService
     Task<ApiResponse<OrderTrackingDto>> GetTrackingAsync(int userId, string orderNumber);
     Task<ApiResponse<string>> ReorderAsync(int userId, int orderId);
     Task<ApiResponse<InvoiceDto>> GetInvoiceAsync(int userId, string orderNumber);
-    Task<ApiResponse<bool>> AdvanceStatusAsync(string orderNumber);
+    Task<ApiResponse<bool>> AdvanceStatusAsync(int userId,string orderNumber);
 }

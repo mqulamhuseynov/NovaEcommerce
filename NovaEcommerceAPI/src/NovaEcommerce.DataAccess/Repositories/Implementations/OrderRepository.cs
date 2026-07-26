@@ -75,4 +75,9 @@ public class OrderRepository(AppDbContext context) : IOrderRepository
         context.OrderStatusHistories.Add(history);
 
     public async Task SaveChangesAsync() => await context.SaveChangesAsync();
+
+    public async Task<Order?> GetOrderForUser(int userId, string orderNumber)
+    {
+        return await context.Orders.FirstOrDefaultAsync(o => o.UserId == userId && o.OrderNumber == orderNumber);
+    }
 }
