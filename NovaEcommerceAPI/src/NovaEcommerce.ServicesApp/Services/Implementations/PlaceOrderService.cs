@@ -76,7 +76,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
                 var orderItems = new List<OrderItem>();
 
-                foreach (var item in cart.Items)
+                foreach (var item in cart.Items.Where(x=>!x.IsSavedForLater))
                 {
                     if (item.ProductVariant.StockQuantity < item.Quantity)
                     {
