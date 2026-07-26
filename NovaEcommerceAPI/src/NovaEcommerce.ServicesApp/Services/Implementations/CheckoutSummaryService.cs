@@ -43,7 +43,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             var items = new List<CheckoutSummaryItemDto>();
             decimal subtotal = 0;
 
-            foreach (var item in cart.Items)
+            foreach (var item in cart.Items.Where(x=>!x.IsSavedForLater))
             {
                 var image = item.ProductVariant.Product.Images.FirstOrDefault(x => x.IsPrimary);
 
