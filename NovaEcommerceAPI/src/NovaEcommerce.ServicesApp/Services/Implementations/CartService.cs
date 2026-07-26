@@ -73,6 +73,8 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
             if (item is null)
                 return ApiResponse<CartDto>.FailResponse("Cart item not found", 404);
 
+            if (quantity <= 0) return ApiResponse<CartDto>.FailResponse("please enter valid number", 400);
+
             if (item.ProductVariant.StockQuantity < quantity)
                 return ApiResponse<CartDto>.FailResponse("Not enough stock available", 400);
 

@@ -1,4 +1,5 @@
-﻿using NovaEcommerce.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NovaEcommerce.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace NovaEcommerce.ServicesApp.Services.Interfaces.Repository
     {
         Task AddPaymentMethodAsync(PaymentMethod payment);
         Task<CheckoutSession?> GetCheckoutSessionAsync(int id);
-        Task<List<PaymentMethod>> GetUserPaymentMethodsAsync(int? userId);
+        Task<bool> HasPaymentMethodsAsync(int userId);
         Task SaveChangesAsync();    
     }
 }
