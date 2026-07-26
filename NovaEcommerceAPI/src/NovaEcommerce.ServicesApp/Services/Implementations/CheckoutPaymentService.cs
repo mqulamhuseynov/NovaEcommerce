@@ -5,13 +5,6 @@ using NovaEcommerce.ServicesApp.DTOs.Checkout.CheckoutPayment;
 using NovaEcommerce.ServicesApp.DTOs.Responses;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NovaEcommerce.ServicesApp.Services.Implementations
 {
@@ -74,6 +67,8 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
                 lastFour = request.CardNumber.Substring(request.CardNumber.Length - 4);
 
+                var hasExistingCards = await _repository.HasPaymentMethodsAsync(userId ?? 0);
+
                 var paymentMethod = new PaymentMethod
                 {
                     UserId = userId ?? 0,
@@ -82,7 +77,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
                     ExpiryMonth = request.ExpiryMonth.Value,
                     ExpiryYear = request.ExpiryYear.Value,
                     CardholderName = request.CardHolderName!,
-                    IsDefault = true
+                    IsDefault = !hasExistingCards
                 };
 
                 await _repository.AddPaymentMethodAsync(paymentMethod);

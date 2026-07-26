@@ -1,4 +1,5 @@
-﻿using NovaEcommerce.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NovaEcommerce.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
