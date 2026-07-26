@@ -29,6 +29,11 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
             return await _context.CheckoutSessions.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<bool> HasPaymentMethodsAsync(int userId)
+        {
+            return await _context.PaymentMethods.AnyAsync(p => p.UserId == userId);
+        }
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
