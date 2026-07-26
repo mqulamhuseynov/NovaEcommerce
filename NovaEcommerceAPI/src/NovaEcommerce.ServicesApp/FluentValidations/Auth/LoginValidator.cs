@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NovaEcommerce.ServicesApp.FluentValidations
+namespace NovaEcommerce.ServicesApp.FluentValidations.Auth
 {
     public class LoginValidator : AbstractValidator<LoginRequestDto>
     {

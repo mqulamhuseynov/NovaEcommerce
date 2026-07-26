@@ -36,7 +36,7 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
             if ((dto.ResolutionType == ResolutionType.Exchange) && string.IsNullOrWhiteSpace(dto.ExchangeSize))
             {
-                return ApiResponse<string>.FailResponse("Choose new size for Exchange", 404);
+                return ApiResponse<string>.FailResponse("Choose new size for Exchange", 400);
             }
 
             var returnRequest = new ReturnRequest

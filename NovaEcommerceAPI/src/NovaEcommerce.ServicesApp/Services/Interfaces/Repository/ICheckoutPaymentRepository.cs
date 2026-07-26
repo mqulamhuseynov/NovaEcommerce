@@ -11,6 +11,7 @@ namespace NovaEcommerce.ServicesApp.Services.Interfaces.Repository
     {
         Task AddPaymentMethodAsync(PaymentMethod payment);
         Task<CheckoutSession?> GetCheckoutSessionAsync(int id);
+        Task<List<PaymentMethod>> GetUserPaymentMethodsAsync(int? userId);
         Task SaveChangesAsync();    
     }
 }

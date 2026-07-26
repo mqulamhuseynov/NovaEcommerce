@@ -18,6 +18,8 @@ namespace NovaEcommerce.ServicesApp.Services.Interfaces.Repository
 
         Task<Cart?> GetCartByUserIdAsync(int userId);
 
+        Task<Coupon?> GetCouponAsync(string code);
+
         Task AddOrderAsync(Order order); 
 
         Task AddOrderItemAsync(List<OrderItem> orderItems);

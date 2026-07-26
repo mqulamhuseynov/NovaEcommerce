@@ -62,6 +62,11 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
 
         public async Task<ApiResponse<CartDto>> UpdateItemQuantityAsync(int? userId, string? sessionId, int cartItemId, int quantity)
         {
+            if (quantity <= 0)
+            {
+                return ApiResponse<CartDto>.FailResponse("Quantity must be greater than zero", 400);
+            }
+
             var cart = await repository.GetOrCreateCart(userId, sessionId);
 
             var item = await repository.GetCartItem(cart.Id, cartItemId);

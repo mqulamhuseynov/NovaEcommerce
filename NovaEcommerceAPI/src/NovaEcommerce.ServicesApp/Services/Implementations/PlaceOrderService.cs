@@ -42,15 +42,53 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
                                          .Sum(x => x.ProductVariant.Price * x.Quantity);
 
                 decimal tax = subtotal * 0.08m;
+
                 decimal discount = 0;
 
-                decimal total = subtotal + checkout.ShippingCost + tax - discount;
+                if (!string.IsNullOrEmpty(cart.AppliedCouponCode))
+                {
+                    var coupon =
+                        await _repository.GetCouponAsync(cart.AppliedCouponCode);
+
+                    if (coupon != null)
+                    {
+                        if (coupon.DiscountType == DiscountType.Percentage)
+                            discount = subtotal * coupon.DiscountValue / 100;
+
+                        else
+                            discount = coupon.DiscountValue;
+                    }
+                }
+
+                decimal total = subtotal - discount + checkout.ShippingCost + tax;
 
                 string orderNumber;
                 do
                 {
                     orderNumber = "NV-" + Random.Shared.Next(100000, 999999);
                 } while (await _repository.OrderNumberExistsAsync(orderNumber));
+
+
+                DateTime start;
+                DateTime end;
+
+                switch (checkout.ShippingMethod)
+                {
+                    case ShippingMethod.Standard:
+                        start = DateTime.UtcNow.AddDays(3);
+                        end = DateTime.UtcNow.AddDays(5);
+                        break;
+
+                    case ShippingMethod.Express:
+                        start = DateTime.UtcNow.AddDays(1);
+                        end = DateTime.UtcNow.AddDays(2);
+                        break;
+
+                    default:
+                        start = DateTime.UtcNow;
+                        end = DateTime.UtcNow;
+                        break;
+                }
 
                 var order = new Order
                 {
@@ -68,8 +106,8 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
                     PaymentLastFourSnapshot = checkout.PaymentMethod?.LastFourDigits.ToLower(),
                     ShippingMethod = checkout.ShippingMethod.ToString(),
                     PlacedAt = DateTime.UtcNow,
-                    EstimatedDeliveryStart = DateTime.UtcNow.AddDays(3),
-                    EstimatedDeliveryEnd = DateTime.UtcNow.AddDays(5),
+                    EstimatedDeliveryStart = start,
+                    EstimatedDeliveryEnd = end,
                 };
 
                 await _repository.AddOrderAsync(order);

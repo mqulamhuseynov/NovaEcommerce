@@ -28,9 +28,14 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
         {
             var checkout = await _repository.GetCheckoutSessionAsync(request.CheckoutSessionId);
 
-            if(checkout == null)
+            if (checkout == null)
             {
                 return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("Checkout session not found.", 404);
+            }
+
+            if (!Enum.IsDefined(typeof(PaymentType),request.PaymentType))
+            {
+                return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("Invalid payment type", 400);
             }
 
             checkout.PaymentType = (PaymentType)request.PaymentType;
@@ -58,14 +63,14 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
                     return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("Invalid CVV.", 400);
                 }
 
-                if (request.ExpiryYear==null || request.ExpiryMonth==null)
+                if (request.ExpiryYear == null || request.ExpiryMonth == null)
                 {
                     return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("Expiry date is required.", 400);
                 }
 
                 var expiry = new DateTime(request.ExpiryYear.Value, request.ExpiryMonth.Value, 1).AddMonths(1).AddDays(-1);
 
-                if(expiry<DateTime.UtcNow)
+                if (expiry < DateTime.UtcNow)
                 {
                     return ApiResponse<CheckoutPaymentResponseDto>.FailResponse("Card has expired.", 400);
                 }
@@ -73,6 +78,13 @@ namespace NovaEcommerce.ServicesApp.Services.Implementations
                 CardType cartType = request.CardNumber.StartsWith("4") ? CardType.Visa : CardType.Mastercard;
 
                 lastFour = request.CardNumber.Substring(request.CardNumber.Length - 4);
+
+                var methods = await _repository.GetUserPaymentMethodsAsync(userId);
+
+                foreach (var method in methods)
+                {
+                    method.IsDefault = false;
+                }
 
                 var paymentMethod = new PaymentMethod
                 {
