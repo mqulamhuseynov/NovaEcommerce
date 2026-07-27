@@ -23,7 +23,7 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
 
         public async Task AddOrderItemAsync(List<OrderItem> orderItems)
         {
-                await _context.OrderItems.AddRangeAsync(orderItems);
+            await _context.OrderItems.AddRangeAsync(orderItems);
         }
 
         public async Task AddOrderStatusHistoryAsync(OrderStatusHistory history)
@@ -34,23 +34,23 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
         public async Task<Cart?> GetCartByUserIdAsync(int userId)
         {
             return await _context.Carts
-                            .Include(x=>x.Items)
-                                .ThenInclude(x=>x.ProductVariant)
-                                    .ThenInclude(x=>x.Product)
-                                        .ThenInclude(x=>x.Images)
-                            .FirstOrDefaultAsync(x=>x.UserId == userId);
+                            .Include(x => x.Items)
+                                .ThenInclude(x => x.ProductVariant)
+                                    .ThenInclude(x => x.Product)
+                                        .ThenInclude(x => x.Images)
+                            .FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
         public async Task<CheckoutSession?> GetCheckoutSessionByUserIdAsync(int userId)
         {
             return await _context.CheckoutSessions
-                            .Include(x=>x.PaymentMethod)
-                            .FirstOrDefaultAsync(x=>x.UserId == userId);
+                            .Include(x => x.PaymentMethod)
+                            .FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
         public async Task<bool> OrderNumberExistsAsync(string orderNumber)
         {
-            return await _context.Orders.AnyAsync(x=>x.OrderNumber == orderNumber);
+            return await _context.Orders.AnyAsync(x => x.OrderNumber == orderNumber);
         }
 
         public void RemoveCartItems(List<CartItem> cartItems)
@@ -80,19 +80,28 @@ namespace NovaEcommerce.DataAccess.Repositories.Implementations
 
         public async Task CommitTransactionAsync()
         {
-            if(_transaction != null)
+            if (_transaction != null)
             {
-                await _transaction.CommitAsync();   
+                await _transaction.CommitAsync();
             }
-            
+
         }
 
         public async Task RollbackTransactionAsync()
         {
-            if(_transaction != null)
+            if (_transaction != null)
             {
                 await _transaction.RollbackAsync();
             }
+        }
+
+        public async Task<Coupon?> GetCouponAsync(string code)
+        {
+            return await _context.Coupons
+                             .FirstOrDefaultAsync(x =>
+                             x.Code == code &&
+                             x.IsActive &&
+                             x.ExpiresAt > DateTime.UtcNow);
         }
     }
 }

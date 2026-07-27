@@ -10,8 +10,8 @@ using NovaEcommerce.API.Middleware;
 using NovaEcommerce.DataAccess.DbContext;
 using NovaEcommerce.DataAccess.Repositories.Implementations;
 using NovaEcommerce.Domain.Entities;
-using NovaEcommerce.ServicesApp.FluentValidation;
-using NovaEcommerce.ServicesApp.FluentValidations;
+using NovaEcommerce.ServicesApp.FluentValidations.Auth;
+using NovaEcommerce.ServicesApp.FluentValidations.CheckoutPayment;
 using NovaEcommerce.ServicesApp.Services.Implementations;
 using NovaEcommerce.ServicesApp.Services.Interfaces;
 using NovaEcommerce.ServicesApp.Services.Interfaces.Repository;
@@ -29,9 +29,9 @@ public class Program
 
         builder.Services.AddFluentValidationAutoValidation();
 
-        builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
-        
+        builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();        
         builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
+        builder.Services.AddValidatorsFromAssemblyContaining<CardValidator>();
 
         Env.Load();
 
