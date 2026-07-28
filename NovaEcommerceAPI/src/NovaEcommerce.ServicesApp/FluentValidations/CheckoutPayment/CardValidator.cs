@@ -17,10 +17,17 @@ namespace NovaEcommerce.ServicesApp.FluentValidations.CheckoutPayment
                 .Length(16)
                 .Matches(@"^\d{16}$");
 
-
             RuleFor(x => x.CVV)
                 .NotEmpty()
                 .Matches(@"^\d{3,4}$");
+
+            RuleFor(x => x.ExpiryMonth)
+            .InclusiveBetween(1, 12)
+            .WithMessage("Expiry month must be between 1 and 12.");
+
+            RuleFor(x => x.ExpiryYear)
+                .GreaterThanOrEqualTo(DateTime.UtcNow.Year)
+                .WithMessage("Expiry year cannot be in the past.");
 
         }
     }
